@@ -9,6 +9,7 @@ model.exports = function(done) {
     dateJoined: '2017-07-22',
     email: 'testuser' + Math.floor(Math.random() * (100 -1)) +1 + '@testmail.com',
     password: 'password',
+    sms: '206-450-7409',    
     role: 'user',
   }).generatePasswordHash('123')
     .then(user => user.save())
