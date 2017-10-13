@@ -5,7 +5,7 @@ require('./_create-minder.scss');
 module.exports = {
   template: require('./create-minder.html'),
   controllerAs: 'createMinderCtrl',
-  controller: ['$log', '$rootScope','twilio', 'minderService', 'angular-bootstrap-calendar', function($log, $rootScope, minderService, 'angular-bootstrap-calendar') {
+  controller: ['$log', '$rootScope','twilio', 'minderService', '$location', function($log, $rootScope, minderService, $location) {
 
     this.$onInit = () => {
       $log.debug('CreateMinderController');
@@ -14,13 +14,13 @@ module.exports = {
         name: null,
         phNum: null,
         id: null,
-      };],
-};
+      };
+    };
 
-this.createMinder = () => {
-        this.minder.location = null;
-        this.minder.location = this.minderData;
-        return minderService.createMinder(this.minder)
+    this.createMinder = () => {
+      this.minder.location = null;
+      this.minder.location = this.minderData;
+      return minderService.createMinder(this.minder)
         .then(() => {
           let res = this.minder;
           this.minder.title = null;
@@ -32,7 +32,7 @@ this.createMinder = () => {
         })
         .then(() => $location.url('/dashboard'))
         .catch(err => $log.error(err));
-      };
     };
-  }],
+  },
+  ],
 };
