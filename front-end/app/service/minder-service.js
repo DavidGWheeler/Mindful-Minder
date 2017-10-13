@@ -12,18 +12,16 @@ module.exports = [
     let service = {};
 
     service.minders = [];
-    service.allMinders = [];
     service.indvMinders = [];
+    service.allMinders = [];
 
-    serivce.create.Minder = (minder) => {
+    service.createMinder = minder => {
       $log.debug('service.createMinder');
 
       return authService.getToken()
       .then(token => {
         let url = '${__API_URL__}/api/minder';
         let headers = {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
           Accept: 'application/json',
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
@@ -46,7 +44,7 @@ module.exports = [
         return $q.reject(err);
       });
     };
-    service.fetchminders = () => {
+    service.fetchMinders = () => {
       $log.debug('service.fetchMinders');
 
       return authService.getToken()
@@ -61,7 +59,7 @@ module.exports = [
           return $http.get(`{__API_URL__}/api/minder`, config);
         })
         .then(res => {
-          $log.log('Reminders retrieved');
+          $log.log('Reminder retrieved');
           service.minders = res.data;
           return res.data;
         })
@@ -70,8 +68,8 @@ module.exports = [
           $q.reject(err);
         });
     };
-    service.fetchAllMinders = () => {
-      $log.debug('service.fetchAllMinders');
+    service.fetchallMinders = () => {
+      $log.debug('service.fetchallMinders');
 
       return authService.getToken()
       .then(token => {
@@ -87,7 +85,7 @@ module.exports = [
       })
         .then(res => {
           $log.log('All Reminders retrieved');
-          service.allminders = res.data;
+          service.allMinders = res.data;
           return res.data;
         })
         .catch(err => {
@@ -95,6 +93,7 @@ module.exports = [
           $q.reject(err);
         });
     };
+    
     service.updateMinder = (minder, minderId) => {
       $log.debug('service.updateMinder');
 
