@@ -15,7 +15,7 @@ AWS.config.setPromisesDependency(require('bluebird'));
 
 const s3 = new AWS.S3();
 
-function s3UploadReminder(params){
+function s3UploadProm(params){
   return new Promise((resolve, reject) => {
     s3.upload(params, (err, data) => {
       if (err) return reject(createError(err.status, err.name));
